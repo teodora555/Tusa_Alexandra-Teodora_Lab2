@@ -37,7 +37,7 @@ namespace Tusa_Alexandra_Teodora_Lab2.Pages.Books
             }
             Book = book;
             ViewData["PublisherID"] = new SelectList(_context.Set<Publisher>(), "ID", "PublisherName");
-            ViewData["AuthorID"] = new SelectList(_context.Set<Author>(), "ID", "FullName");
+            ViewData["AuthorID"] = new SelectList(_context.Author, "ID", "FullName");
             return Page();
         }
 
