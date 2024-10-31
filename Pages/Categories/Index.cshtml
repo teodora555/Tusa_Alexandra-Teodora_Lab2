@@ -1,11 +1,11 @@
-﻿@page
+﻿@page "{id:int?}"
 @model Tusa_Alexandra_Teodora_Lab2.Pages.Categories.IndexModel
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Categories</h1>
 
 <p>
     <a asp-page="Create">Create New</a>
@@ -14,13 +14,13 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Category[0].CategoryName)
+                @Html.DisplayNameFor(model => model.CategoryData.Categories.First().CategoryName)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Category) {
+@foreach (var item in Model.CategoryData.Categories) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.CategoryName)
@@ -34,3 +34,25 @@
 }
     </tbody>
 </table>
+
+@if (Model.CategoryData.Books != null)
+{
+    <h3>Books in Selected Category</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Titlu</th>
+                <th>Autor</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var book in Model.CategoryData.Books)
+            {
+                <tr>
+                    <td>@book.Title</td>
+                    <td>@book.Author.FullName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
