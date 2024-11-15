@@ -19,13 +19,11 @@ namespace Tusa_Alexandra_Teodora_Lab2.Pages.Members
             _context = context;
         }
 
-        public IList<Borrowing> Borrowing { get;set; } = default!;
+        public IList<Member> Member { get;set; } = default!;
 
         public async Task OnGetAsync()
         {
-            Borrowing = await _context.Borrowing
-                .Include(b => b.Book)
-                .Include(b => b.Member).ToListAsync();
+            Member = await _context.Member.ToListAsync();
         }
     }
 }

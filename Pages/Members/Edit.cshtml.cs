@@ -21,7 +21,7 @@ namespace Tusa_Alexandra_Teodora_Lab2.Pages.Members
         }
 
         [BindProperty]
-        public Borrowing Borrowing { get; set; } = default!;
+        public Member Member { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -30,14 +30,15 @@ namespace Tusa_Alexandra_Teodora_Lab2.Pages.Members
                 return NotFound();
             }
 
-            var borrowing =  await _context.Borrowing.FirstOrDefaultAsync(m => m.ID == id);
-            if (borrowing == null)
+            var member = await _context.Member.FirstOrDefaultAsync(m => m.ID == id);
+
+            if (member == null)
             {
                 return NotFound();
             }
-            Borrowing = borrowing;
-           ViewData["BookID"] = new SelectList(_context.Book, "ID", "ID");
-           ViewData["MemberID"] = new SelectList(_context.Set<Member>(), "ID", "ID");
+
+            Member = member;
+
             return Page();
         }
 
@@ -50,7 +51,7 @@ namespace Tusa_Alexandra_Teodora_Lab2.Pages.Members
                 return Page();
             }
 
-            _context.Attach(Borrowing).State = EntityState.Modified;
+            _context.Attach(Member).State = EntityState.Modified;
 
             try
             {
@@ -58,7 +59,7 @@ namespace Tusa_Alexandra_Teodora_Lab2.Pages.Members
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BorrowingExists(Borrowing.ID))
+                if (!MemberExists(Member.ID))
                 {
                     return NotFound();
                 }
@@ -71,9 +72,9 @@ namespace Tusa_Alexandra_Teodora_Lab2.Pages.Members
             return RedirectToPage("./Index");
         }
 
-        private bool BorrowingExists(int id)
+        private bool MemberExists(int id)
         {
-            return _context.Borrowing.Any(e => e.ID == id);
+            return _context.Member.Any(e => e.ID == id);
         }
     }
 }

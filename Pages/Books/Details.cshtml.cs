@@ -30,7 +30,7 @@ namespace Tusa_Alexandra_Teodora_Lab2.Pages.Books
 
             var book = await _context.Book
                 .Include(b => b.BookCategories)
-                    .ThenInclude(bc => bc.Category)
+                    .ThenInclude(b => b.Category)
                 .Include(b => b.Author)
                 .Include(b => b.Publisher)
                 .FirstOrDefaultAsync(m => m.ID == id);

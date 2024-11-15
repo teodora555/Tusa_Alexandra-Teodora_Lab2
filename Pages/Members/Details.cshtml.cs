@@ -19,7 +19,7 @@ namespace Tusa_Alexandra_Teodora_Lab2.Pages.Members
             _context = context;
         }
 
-        public Borrowing Borrowing { get; set; } = default!;
+        public Member Member { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,14 +28,14 @@ namespace Tusa_Alexandra_Teodora_Lab2.Pages.Members
                 return NotFound();
             }
 
-            var borrowing = await _context.Borrowing.FirstOrDefaultAsync(m => m.ID == id);
-            if (borrowing == null)
+            var member = await _context.Member.FirstOrDefaultAsync(m => m.ID == id);
+            if (member == null)
             {
                 return NotFound();
             }
             else
             {
-                Borrowing = borrowing;
+                Member = member;
             }
             return Page();
         }

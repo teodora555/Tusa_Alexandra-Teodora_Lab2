@@ -20,7 +20,7 @@ namespace Tusa_Alexandra_Teodora_Lab2.Pages.Members
         }
 
         [BindProperty]
-        public Borrowing Borrowing { get; set; } = default!;
+        public Member Member { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,15 +29,15 @@ namespace Tusa_Alexandra_Teodora_Lab2.Pages.Members
                 return NotFound();
             }
 
-            var borrowing = await _context.Borrowing.FirstOrDefaultAsync(m => m.ID == id);
+            var member = await _context.Member.FirstOrDefaultAsync(m => m.ID == id);
 
-            if (borrowing == null)
+            if (member == null)
             {
                 return NotFound();
             }
             else
             {
-                Borrowing = borrowing;
+                Member = member;
             }
             return Page();
         }
@@ -49,11 +49,11 @@ namespace Tusa_Alexandra_Teodora_Lab2.Pages.Members
                 return NotFound();
             }
 
-            var borrowing = await _context.Borrowing.FindAsync(id);
-            if (borrowing != null)
+            var member = await _context.Member.FindAsync(id);
+            if (member != null)
             {
-                Borrowing = borrowing;
-                _context.Borrowing.Remove(Borrowing);
+                Member = member;
+                _context.Member.Remove(Member);
                 await _context.SaveChangesAsync();
             }
 

@@ -19,15 +19,13 @@ namespace Tusa_Alexandra_Teodora_Lab2.Pages.Members
             _context = context;
         }
 
+        [BindProperty]
+        public Member Member { get; set; } = new Member();
+
         public IActionResult OnGet()
         {
-        ViewData["BookID"] = new SelectList(_context.Book, "ID", "ID");
-        ViewData["MemberID"] = new SelectList(_context.Set<Member>(), "ID", "ID");
             return Page();
         }
-
-        [BindProperty]
-        public Borrowing Borrowing { get; set; } = default!;
 
         // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
@@ -37,7 +35,7 @@ namespace Tusa_Alexandra_Teodora_Lab2.Pages.Members
                 return Page();
             }
 
-            _context.Borrowing.Add(Borrowing);
+            _context.Member.Add(Member);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
